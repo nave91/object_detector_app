@@ -7,6 +7,7 @@ import cv2
 import datetime
 from threading import Thread
 from matplotlib import colors
+import logging
 
 
 class FPS:
@@ -114,6 +115,14 @@ def color_name_to_rgb():
     return dict(colors_rgb)
 
 
+import logging
+logger = logging.getLogger('bellhops')
+logger.setLevel(logging.INFO)
+fh = logging.FileHandler('spam.log')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh.setFormatter(formatter)
+fh.setLevel(logging.INFO)
+logger.addHandler(fh)
 def draw_boxes_and_labels(
         boxes,
         classes,
@@ -173,6 +182,8 @@ def draw_boxes_and_labels(
                         int(100 * scores[i]))
                 else:
                     display_str = 'score: {}%'.format(int(100 * scores[i]))
+                print(display_str)
+                logger.info(display_str)
                 box_to_display_str_map[box].append(display_str)
                 if agnostic_mode:
                     box_to_color_map[box] = 'DarkOrange'
