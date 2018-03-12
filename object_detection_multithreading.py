@@ -53,7 +53,7 @@ def detect_objects(image_np, sess, detection_graph):
         classes=np.squeeze(classes).astype(np.int32),
         scores=np.squeeze(scores),
         category_index=category_index,
-        min_score_thresh=.5
+        min_score_thresh=.7
     )
     return dict(rect_points=rect_points, class_names=class_names, class_colors=class_colors)
 
