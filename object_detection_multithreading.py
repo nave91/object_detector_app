@@ -53,7 +53,7 @@ def detect_objects(image_np, sess, detection_graph):
         classes=np.squeeze(classes).astype(np.int32),
         scores=np.squeeze(scores),
         category_index=category_index,
-        min_score_thresh=.7
+        min_score_thresh=.5
     )
     return dict(rect_points=rect_points, class_names=class_names, class_colors=class_colors)
 
@@ -83,7 +83,7 @@ def worker(input_q, output_q):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-src', '--source', dest='video_source', type=int,
+    parser.add_argument('-src', '--source', dest='video_source',
                         default=0, help='Device index of the camera.')
     parser.add_argument('-wd', '--width', dest='width', type=int,
                         default=480, help='Width of the frames in the video stream.')
